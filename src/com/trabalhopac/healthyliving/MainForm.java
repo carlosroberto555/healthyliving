@@ -1,5 +1,7 @@
 package com.trabalhopac.healthyliving;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -235,6 +237,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        lblBoasVindas.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         lblBoasVindas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBoasVindas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -324,8 +327,13 @@ public class MainForm extends javax.swing.JFrame {
 
         } else {
 
-            //chama form que adiciona dados
-            
+            int confirm = JOptionPane.showConfirmDialog(null, "Para acessar esse recurso, você precisa inserir\nalgumas informações à sua conta."
+                    + "\n\nDeseja acessar a página para inserir?", "Completar informações", JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                new Hyperlink().browse("http://healthyliving.aduv.com.br");
+            }
+
         }
 
 
@@ -356,6 +364,8 @@ public class MainForm extends javax.swing.JFrame {
             lblTipoImc.setText(new CalcIMC().getTipoImc(imc));
 
             lblInfoNome.setText("Nome: " + userdata.getString("Nome"));
+            lblInfoIdade.setText("Idade: " + getIdade(userdata.getString("Nascimento")) + " anos");
+            lblInfoSexo.setText("Sexo: " + getSexo(userdata.getString("Sexo")));
 
         } catch (JSONException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -366,25 +376,47 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Calcula a idade de acordo com a data passada.
      *
-     * @param data
+     * @param dataStr
      * @return A idade da pessoa
-     * @author Isaias Pfaffenseller
+     * @author Isaias Pfaffenseller, Modificado por Carlos Roberto
      */
-    public static Integer getIdade(Date data) {
+    private int getIdade(String dataStr) {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date data = null;
+
+        try {
+            data = new java.sql.Date(format.parse(dataStr).getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         Calendar dataNascimento = Calendar.getInstance();
         dataNascimento.setTime(data);
         Calendar dataAtual = Calendar.getInstance();
 
-        Integer diferencaMes = dataAtual.get(Calendar.MONTH) - dataNascimento.get(Calendar.MONTH);
-        Integer diferencaDia = dataAtual.get(Calendar.DAY_OF_MONTH) - dataNascimento.get(Calendar.DAY_OF_MONTH);
-        Integer idade = (dataAtual.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR));
+        int diferencaMes = dataAtual.get(Calendar.MONTH) - dataNascimento.get(Calendar.MONTH);
+        int diferencaDia = dataAtual.get(Calendar.DAY_OF_MONTH) - dataNascimento.get(Calendar.DAY_OF_MONTH);
+        int idade = (dataAtual.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR));
 
         if (diferencaMes < 0 || (diferencaMes == 0 && diferencaDia < 0)) {
             idade--;
         }
 
         return idade;
+
+    }
+
+    private String getSexo(String sexo) {
+
+        switch (sexo) {
+            case "M":
+                return "Masculino";
+            case "F":
+                return "Feminino";
+            default:
+                return "Não informado";
+        }
 
     }
 

@@ -25,12 +25,12 @@ public class DietaForm extends javax.swing.JFrame implements Runnable {
 
         btnVoltar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        htmlPane = new javax.swing.JEditorPane();
         progresso = new javax.swing.JProgressBar();
         progresso.setIndeterminate(true);
         txtLoading = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        htmlPane = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,16 +48,14 @@ public class DietaForm extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        htmlPane.setEditable(false);
-        htmlPane.setContentType("text/html"); // NOI18N
-        htmlPane.setText("");
-        htmlPane.setToolTipText("");
-        jScrollPane1.setViewportView(htmlPane);
-
         txtLoading.setText("Carregando...");
 
         txtTitulo.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txtTitulo.setText("Dieta para IMC");
+
+        htmlPane.setEditable(false);
+        htmlPane.setContentType("text/html"); // NOI18N
+        jScrollPane2.setViewportView(htmlPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,7 +64,7 @@ public class DietaForm extends javax.swing.JFrame implements Runnable {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 359, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -85,7 +83,7 @@ public class DietaForm extends javax.swing.JFrame implements Runnable {
                 .addContainerGap()
                 .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -123,7 +121,7 @@ public class DietaForm extends javax.swing.JFrame implements Runnable {
     private void tipoDieta(float imc) {
 
         String titulo = null;
-        
+
         if (imc >= 18 && imc <= 25) {
 
             this.dieta = "imc18a25";
@@ -140,7 +138,7 @@ public class DietaForm extends javax.swing.JFrame implements Runnable {
             titulo = "Dieta para IMC maior que 25";
 
         }
-        
+
         txtTitulo.setText(titulo);
 
     }
@@ -149,7 +147,7 @@ public class DietaForm extends javax.swing.JFrame implements Runnable {
     public void run() {
 
         String site = "http://healthyliving.aduv.com.br/admin/dietas/dieta.php";
-        String parametros = "dieta=" + dieta;
+        String parametros = "dieta=" + dieta + "&encoding=" + codificacao();
 
         StringBuilder resposta = new ConexaoHTTP().httpBuffer(site, parametros);
         htmlPane.setText(resposta.toString());
@@ -159,11 +157,25 @@ public class DietaForm extends javax.swing.JFrame implements Runnable {
 
     }
 
+    public String codificacao() {
+
+        String resultado;
+
+        if (System.getProperty("os.name").contains("Windows")) {
+            resultado = "windows";
+        } else {
+            resultado = "unix";
+        }
+
+        return resultado;
+        
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JEditorPane htmlPane;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JProgressBar progresso;
     private javax.swing.JLabel txtLoading;
     private javax.swing.JLabel txtTitulo;

@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  */
 public class CalcIMC extends javax.swing.JFrame {
 
-    float altura, massa, imc;
+    private float altura, massa, imc;
 
     //Creates new form CalcIMC
     public CalcIMC() {
@@ -219,7 +219,7 @@ public class CalcIMC extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    public void imc() {
+    private void imc() {
 
         altura = toFloat(jTAltura.getText()); //Recebe o texto do campo altura
         massa = toFloat(jTMassa.getText()); //Recebe o texto do campo altura

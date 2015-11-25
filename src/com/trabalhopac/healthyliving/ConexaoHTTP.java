@@ -37,7 +37,7 @@ public class ConexaoHTTP {
                 escrever.write(parametros);
                 escrever.flush();
                 buffer = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
+                
                 while ((linha = buffer.readLine()) != null) {
 
                     resposta.append(linha);
