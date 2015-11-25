@@ -52,7 +52,10 @@ public class MainForm extends javax.swing.JFrame {
         lblInfoNome = new javax.swing.JLabel();
         lblInfoIdade = new javax.swing.JLabel();
         lblInfoSexo = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lblInfoUser = new javax.swing.JLabel();
+        lblInfoTel = new javax.swing.JLabel();
+        lblInfoMail = new javax.swing.JLabel();
+        btnAlteraDados = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         lblBoasVindas = new javax.swing.JLabel();
@@ -74,9 +77,6 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        mtlayerpnlFerramentas.setLayer(btnIMC, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        mtlayerpnlFerramentas.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout mtlayerpnlFerramentasLayout = new javax.swing.GroupLayout(mtlayerpnlFerramentas);
         mtlayerpnlFerramentas.setLayout(mtlayerpnlFerramentasLayout);
         mtlayerpnlFerramentasLayout.setHorizontalGroup(
@@ -97,6 +97,8 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(109, Short.MAX_VALUE))
         );
+        mtlayerpnlFerramentas.setLayer(btnIMC, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlFerramentas.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         pnlPai.addTab("Ferramentas", mtlayerpnlFerramentas);
 
@@ -128,13 +130,6 @@ public class MainForm extends javax.swing.JFrame {
 
         lblTipoImc.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblTipoImc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-
-        mtlayerpnlNutricao.setLayer(btnDieta, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        mtlayerpnlNutricao.setLayer(btnDicaDoDia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        mtlayerpnlNutricao.setLayer(lblPeso, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        mtlayerpnlNutricao.setLayer(lblAltura, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        mtlayerpnlNutricao.setLayer(lblIMC, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        mtlayerpnlNutricao.setLayer(lblTipoImc, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout mtlayerpnlNutricaoLayout = new javax.swing.GroupLayout(mtlayerpnlNutricao);
         mtlayerpnlNutricao.setLayout(mtlayerpnlNutricaoLayout);
@@ -175,6 +170,12 @@ public class MainForm extends javax.swing.JFrame {
                         .addComponent(btnDicaDoDia, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
+        mtlayerpnlNutricao.setLayer(btnDieta, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlNutricao.setLayer(btnDicaDoDia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlNutricao.setLayer(lblPeso, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlNutricao.setLayer(lblAltura, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlNutricao.setLayer(lblIMC, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlNutricao.setLayer(lblTipoImc, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         pnlPai.addTab("Nutrição", mtlayerpnlNutricao);
 
@@ -187,12 +188,21 @@ public class MainForm extends javax.swing.JFrame {
         lblInfoSexo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblInfoSexo.setText("Sexo:");
 
-        jButton1.setText("Alterar dados");
+        lblInfoUser.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblInfoUser.setText("Usuário:");
 
-        mtlayerpnlUsuario.setLayer(lblInfoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        mtlayerpnlUsuario.setLayer(lblInfoIdade, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        mtlayerpnlUsuario.setLayer(lblInfoSexo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        mtlayerpnlUsuario.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        lblInfoTel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblInfoTel.setText("Telefone:");
+
+        lblInfoMail.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblInfoMail.setText("E-mail:");
+
+        btnAlteraDados.setText("Alterar dados");
+        btnAlteraDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlteraDadosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout mtlayerpnlUsuarioLayout = new javax.swing.GroupLayout(mtlayerpnlUsuario);
         mtlayerpnlUsuario.setLayout(mtlayerpnlUsuarioLayout);
@@ -202,9 +212,12 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(mtlayerpnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblInfoNome)
-                    .addComponent(lblInfoIdade)
                     .addComponent(lblInfoSexo)
-                    .addComponent(jButton1))
+                    .addComponent(btnAlteraDados)
+                    .addComponent(lblInfoTel)
+                    .addComponent(lblInfoMail)
+                    .addComponent(lblInfoIdade)
+                    .addComponent(lblInfoUser))
                 .addContainerGap(495, Short.MAX_VALUE))
         );
         mtlayerpnlUsuarioLayout.setVerticalGroup(
@@ -216,10 +229,23 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(lblInfoIdade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblInfoSexo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(lblInfoUser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblInfoTel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblInfoMail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(btnAlteraDados)
                 .addContainerGap())
         );
+        mtlayerpnlUsuario.setLayer(lblInfoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlUsuario.setLayer(lblInfoIdade, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlUsuario.setLayer(lblInfoSexo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlUsuario.setLayer(lblInfoUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlUsuario.setLayer(lblInfoTel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlUsuario.setLayer(lblInfoMail, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mtlayerpnlUsuario.setLayer(btnAlteraDados, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         pnlPai.addTab("Usuário", mtlayerpnlUsuario);
 
@@ -331,7 +357,7 @@ public class MainForm extends javax.swing.JFrame {
                     + "\n\nDeseja acessar a página para inserir?", "Completar informações", JOptionPane.YES_NO_OPTION);
 
             if (confirm == JOptionPane.YES_OPTION) {
-                new Hyperlink().browse("http://healthyliving.aduv.com.br");
+                new DataForm().setVisible(true);
             }
 
         }
@@ -344,6 +370,12 @@ public class MainForm extends javax.swing.JFrame {
         pnlPai.setSelectedIndex(2);
 
     }//GEN-LAST:event_lblBoasVindasMouseClicked
+
+    private void btnAlteraDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlteraDadosActionPerformed
+
+	new DataForm().setVisible(true);
+
+    }//GEN-LAST:event_btnAlteraDadosActionPerformed
 
     private void setDados() {
 
@@ -363,9 +395,13 @@ public class MainForm extends javax.swing.JFrame {
             lblIMC.setText("IMC: " + String.format("%.2f", imc));
             lblTipoImc.setText(new CalcIMC().getTipoImc(imc));
 
+	    //Informações do usuário
             lblInfoNome.setText("Nome: " + userdata.getString("Nome"));
             lblInfoIdade.setText("Idade: " + getIdade(userdata.getString("Nascimento")) + " anos");
             lblInfoSexo.setText("Sexo: " + getSexo(userdata.getString("Sexo")));
+	    lblInfoUser.setText("Usuário: " + userdata.getString("Usuario"));
+	    lblInfoTel.setText("Telefone: " + userdata.getString("Telefone"));
+	    lblInfoMail.setText("E-mail: " + userdata.getString("Email"));
 
         } catch (JSONException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -421,19 +457,22 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlteraDados;
     private javax.swing.JButton btnDicaDoDia;
     private javax.swing.JButton btnDieta;
     private javax.swing.JButton btnIMC;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblAltura;
     private javax.swing.JLabel lblBoasVindas;
     private javax.swing.JLabel lblIMC;
     private javax.swing.JLabel lblInfoIdade;
+    private javax.swing.JLabel lblInfoMail;
     private javax.swing.JLabel lblInfoNome;
     private javax.swing.JLabel lblInfoSexo;
+    private javax.swing.JLabel lblInfoTel;
+    private javax.swing.JLabel lblInfoUser;
     private javax.swing.JLabel lblPeso;
     private javax.swing.JLabel lblTipoImc;
     private javax.swing.JLayeredPane mtlayerpnlFerramentas;

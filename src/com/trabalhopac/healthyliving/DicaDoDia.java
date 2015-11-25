@@ -29,6 +29,7 @@ public class DicaDoDia extends javax.swing.JFrame {
         lblDicaDoDia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         txtDicaDoDia.setEditable(false);
         txtDicaDoDia.setContentType("text/html"); // NOI18N
